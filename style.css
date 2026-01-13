@@ -35,6 +35,12 @@ main {
     justify-content: space-around;
 }
 
+h1 {
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: var(--Rose900);
+}
+
 div#container-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -52,25 +58,41 @@ div.card-dessert img {
 }
 
 div.card-dessert button {
+    color: var(--Rose900);
+    font-weight: 600;
     width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 5px;
     margin: auto;
     padding: 10px 30px;
     border: 1px solid var(--Rose400);
     background-color: white;
     border-radius: 50px;
     margin-top: -15px;
+    cursor: pointer;
+}
+
+div.card-dessert button img {
+    width: 20px;
 }
 
 div.card-dessert p {
-    color: var(--Rose300);
+    color: var(--Rose400);
+    font-weight: 400;
+    margin-top: 10px;
 }
 
 div.card-dessert h3 {
     color: var(--Rose900);
+    font-weight: 700;
+    margin-top: 5px;
 }
 
 div.card-dessert span {
     color: var(--Red);
+    margin-top: 5px;
+    font-weight: 600;
 }
 
 section#cart-div {
@@ -83,6 +105,7 @@ section#cart-div {
 
 section#cart-div h2 {
     color: var(--Red);
+    font-weight: 700;
 }
 
 section#cart-div img {
@@ -90,6 +113,6 @@ section#cart-div img {
 }
 
 section#cart-div p {
-    color: var(--Rose900);
-    font-weight: 500;
+    color: var(--Rose500);
+    font-weight: 600;
 }
