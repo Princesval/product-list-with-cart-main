@@ -1,8 +1,10 @@
 let containerHTML = document.getElementById('container-grid');
 let listaDeProdutos = [];
 
-let cartHTML = document.getElementById('cart');
+let cartHTML = document.getElementById('cart-div');
 let cartCounter = document.getElementById('cart-counter');
+let emptyCartImg = document.getElementById('empty-cart-img');
+let emptyCartP = document.getElementById('empty-cart-p');
 let cart = [];
 
 const addDataToHTML = () => {
@@ -49,8 +51,43 @@ const addToCart = (produto_id) => {
     } else {
         cart[position].quantity = cart[position].quantity + 1;
     }
-    console.log(cart)
+    addToCartHTML();
 }
+
+const addToCartHTML = () => {
+    cartHTML.innerHTML = ``;
+    let totalQuantity = 0;
+    if(cart.length > 0) {
+        emptyCartImg.style.display = 'none';
+        emptyCartP.style.display = 'none';
+        cart.forEach(cart => {
+            totalQuantity = totalQuantity + cart.quantity
+            let newCart = document.createElement('div');
+            newCart.classList.add('cart-product-item');
+            let position = listaDeProdutos.findIndex((value) => value.id == cart.produto_id);
+            let info = listaDeProdutos[position];
+            newCart.innerHTML += `
+                <div class="info-product">
+                    <p>${info.name}</p>
+                    <p>
+                    <span class="span-quantity">${cart.quantity}x</span> 
+                    <span class="span-price">@$${info.price}</span> 
+                    <span class="span-price-product-total">$${info.price * cart.quantity}</span></p>
+                </div>
+
+                <div class="cart-remove-button">
+                    <button>
+                        <img src="assets/images/icon-remove-item.svg" alt="">
+                    </button>
+                </div>
+            `;
+            cartHTML.appendChild(newCart)
+            console.log(totalQuantity);
+        })
+    }
+    cartCounter.innerText = totalQuantity;
+}
+
 
 const initApp = () => {
     // Pegar dados do json

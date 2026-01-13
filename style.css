@@ -95,7 +95,10 @@ div.card-dessert span {
     font-weight: 600;
 }
 
-section#cart-div {
+/* CART */
+
+section#cart-section {
+    width: 274px;
     background-color: white;
     height: fit-content;
     box-sizing: border-box;
@@ -103,16 +106,58 @@ section#cart-div {
     border-radius: 15px;
 }
 
-section#cart-div h2 {
+div#cart h2 {
     color: var(--Red);
     font-weight: 700;
+    margin-bottom: 15px;
 }
 
-section#cart-div img {
+div#cart img {
     width: 250px;
 }
 
-section#cart-div p {
+div#cart p {
     color: var(--Rose500);
     font-weight: 600;
+}
+
+div.cart-product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.cart-product-item > div.info-product > p {
+    color: var(--Rose900);
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+span.span-quantity {
+    color: var(--Red);
+    font-weight: 700;
+    padding-right: 8px;
+}
+
+span.span-price {
+    color: var(--Rose300);
+    font-weight: 400;
+    padding-right: 5px;
+}
+
+span.span-price-product-total {
+    color: var(--Rose500);
+    font-weight: 600;
+}
+
+div.cart-remove-button button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    border-radius: 50%;
+    border: 1px solid var(--Rose300);
+    background-color: white;
+    padding: 5px;
+    cursor: pointer;
 }
