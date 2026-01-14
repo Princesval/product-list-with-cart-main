@@ -98,7 +98,7 @@ div.card-dessert span {
 /* CART */
 
 section#cart-section {
-    width: 274px;
+    width: 300px;
     background-color: white;
     height: fit-content;
     box-sizing: border-box;
@@ -160,4 +160,51 @@ div.cart-remove-button button {
     background-color: white;
     padding: 5px;
     cursor: pointer;
+}
+
+/* Confirm order div */
+
+div#confirm-order {
+    display: none;
+    margin-top: 20px;
+}
+
+div#order-total {
+    display: flex;
+    justify-content: space-between;
+    color: var(--Rose900);
+    margin-bottom: 10px;
+
+}
+
+div#order-total span {
+    font-weight: 700;
+}
+
+div#carbon-neutral {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+div#carbon-neutral-info {
+    background-color: var(--Rose100);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+}
+
+div#carbon-neutral button {
+    background-color: var(--Red);
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
 }

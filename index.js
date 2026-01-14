@@ -6,6 +6,10 @@ let cartCounter = document.getElementById('cart-counter');
 let emptyCartImg = document.getElementById('empty-cart-img');
 let emptyCartP = document.getElementById('empty-cart-p');
 let cart = [];
+let OrderFinalPriceUpdate = document.getElementById('order-final-price');
+let finalPrice;
+
+let confirmOrderDiv = document.getElementById('confirm-order');
 
 const addDataToHTML = () => {
     containerHTML.innerHTML= '';
@@ -57,11 +61,14 @@ const addToCart = (produto_id) => {
 const addToCartHTML = () => {
     cartHTML.innerHTML = ``;
     let totalQuantity = 0;
+    finalPrice = 0;
     if(cart.length > 0) {
         emptyCartImg.style.display = 'none';
         emptyCartP.style.display = 'none';
+        confirmOrderDiv.style.display = 'block'
+
         cart.forEach(cart => {
-            totalQuantity = totalQuantity + cart.quantity
+            totalQuantity = totalQuantity + cart.quantity;
             let newCart = document.createElement('div');
             newCart.classList.add('cart-product-item');
             let position = listaDeProdutos.findIndex((value) => value.id == cart.produto_id);
@@ -81,8 +88,11 @@ const addToCartHTML = () => {
                     </button>
                 </div>
             `;
+            finalPrice += info.price * cart.quantity;
             cartHTML.appendChild(newCart)
+            console.log(`Preço final: ${finalPrice}`);
             console.log(totalQuantity);
+            OrderFinalPriceUpdate.innerText = `$${finalPrice.toFixed(2)}`;
         })
     }
     cartCounter.innerText = totalQuantity;
