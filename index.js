@@ -83,7 +83,7 @@ const addToCartHTML = () => {
                 </div>
 
                 <div class="cart-remove-button">
-                    <button>
+                    <button  class="remove-item" data-id="${cart.produto_id}">
                         <img src="assets/images/icon-remove-item.svg" alt="">
                     </button>
                 </div>
@@ -96,6 +96,22 @@ const addToCartHTML = () => {
         })
     }
     cartCounter.innerText = totalQuantity;
+}
+
+cartHTML.addEventListener('click', (event) => {
+    const button = event.target.closest('.remove-item');
+    if(!button) return;
+
+    const produto_id = button.dataset.id;
+    removeFromCart(produto_id);
+})
+
+const removeFromCart = (produto_id) => {
+    let position = cart.findIndex(item => item.produto_id == produto_id);
+
+    cart.splice(position, 1);
+
+    addToCartHTML();
 }
 
 
