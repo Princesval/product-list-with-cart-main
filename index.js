@@ -24,20 +24,30 @@ const addDataToHTML = () => {
                 <img src="assets/images/icon-add-to-cart.svg" alt="">
                 Add to Cart
             </button>
+            <button class="plus-minus-btn">
+                <span class="decrement-btn"><img src="assets/images/icon-decrement-quantity.svg" alt="-"></span>
+                <span class="quantity-span">1</span>
+                <span class="increment-btn"><img src="assets/images/icon-increment-quantity.svg" alt=""></span>
+            </button>
             <p>${produto.category}</p>
             <h3>${produto.name}</h3>
             <span>$${produto.price.toFixed(2)}</span>`;
-            containerHTML.appendChild(newProduto)
-        })
+            containerHTML.appendChild(newProduto);
+        });
+            listaDeProdutos.forEach(produto => {
+            updateCardButton(produto.id);
+        });
+
     }
 }
 
 containerHTML.addEventListener('click', (event) => {
     let click = event.target;
-    if(click.classList.contains('addToCart')){
-        let produto_id = click.parentElement.dataset.id;
+    const btn = event.target.closest('.addToCart');
+    if (btn) {
+        let produto_id = btn.parentElement.dataset.id;
         addToCart(produto_id);
-        }
+    }
 })
 
 const addToCart = (produto_id) => {
@@ -90,13 +100,68 @@ const addToCartHTML = () => {
             `;
             finalPrice += info.price * cart.quantity;
             cartHTML.appendChild(newCart)
-            console.log(`Preço final: ${finalPrice}`);
-            console.log(totalQuantity);
             OrderFinalPriceUpdate.innerText = `$${finalPrice.toFixed(2)}`;
         })
+    } else if (cart.length == 0){
+        emptyCartImg.style.display = 'block';
+        emptyCartP.style.display = 'block';
+        confirmOrderDiv.style.display = 'none'
     }
     cartCounter.innerText = totalQuantity;
+    listaDeProdutos.forEach(produto => {
+    updateCardButton(produto.id);})
 }
+
+const updateCardButton = (produto_id) => {
+    const card = document.querySelector(`.card-dessert[data-id="${produto_id}"]`);
+
+    if (!card) return;
+
+    const addBtn = card.querySelector('.addToCart');
+    const qtyBtn = card.querySelector('.plus-minus-btn');
+    const qtySpan = card.querySelector('.quantity-span');
+    const item = cart.find(item => item.produto_id == produto_id);
+
+    if (item) {
+        addBtn.style.display = 'none';
+        qtyBtn.style.display = 'flex';
+        qtySpan.innerText = item.quantity;
+    } else {
+        addBtn.style.display = 'flex';
+        qtyBtn.style.display = 'none';
+    }
+}
+
+containerHTML.addEventListener('click', (event) => {
+    const card = event.target.closest('.card-dessert');
+    if (!card) return;
+
+    const produto_id = card.dataset.id;
+
+    // +
+    if (event.target.closest('.increment-btn')) {
+        addToCart(produto_id);
+    }
+
+    // -
+    if (event.target.closest('.decrement-btn')) {
+        decrementItem(produto_id);
+    }
+});
+
+const decrementItem = (produto_id) => {
+    let position = cart.findIndex(item => item.produto_id == produto_id);
+    if (position < 0) return;
+
+    cart[position].quantity--;
+
+    if (cart[position].quantity <= 0) {
+        cart.splice(position, 1);
+    }
+
+    addToCartHTML();
+};
+
 
 cartHTML.addEventListener('click', (event) => {
     const button = event.target.closest('.remove-item');
@@ -104,7 +169,7 @@ cartHTML.addEventListener('click', (event) => {
 
     const produto_id = button.dataset.id;
     removeFromCart(produto_id);
-})
+});
 
 const removeFromCart = (produto_id) => {
     let position = cart.findIndex(item => item.produto_id == produto_id);
@@ -121,7 +186,6 @@ const initApp = () => {
     .then(response => response.json())
     .then(data => {
         listaDeProdutos = data;
-        console.log(listaDeProdutos);
         addDataToHTML();
     })
 }

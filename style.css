@@ -60,9 +60,11 @@ div.card-dessert img {
 div.card-dessert button {
     color: var(--Rose900);
     font-weight: 600;
-    width: fit-content;
+    width: 160px;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 5px;
     margin: auto;
     padding: 10px 30px;
@@ -73,9 +75,43 @@ div.card-dessert button {
     cursor: pointer;
 }
 
+div.card-dessert button:hover {
+    border-color: var(--Red);
+}
+
 div.card-dessert button img {
     width: 20px;
 }
+
+/* + - */
+
+.plus-minus-btn {
+    display: none;
+    width: 160px;
+    height: 44px;
+}
+
+div.card-dessert > button.plus-minus-btn {
+    background-color: var(--Red);
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.card-dessert > button.plus-minus-btn span.decrement-btn img{
+    width: 12px;
+    float: left;
+}
+
+div.card-dessert > button.plus-minus-btn span.increment-btn img {
+    width: 12px;
+    float: right;
+}
+
+div.card-dessert > button.plus-minus-btn span.quantity-span {
+    color: white;
+}
+/* + - */
 
 div.card-dessert p {
     color: var(--Rose400);
