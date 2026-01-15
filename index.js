@@ -11,6 +11,8 @@ let finalPrice;
 
 let confirmOrderDiv = document.getElementById('confirm-order');
 
+// Código principal
+
 const addDataToHTML = () => {
     containerHTML.innerHTML= '';
     if(listaDeProdutos.length > 0) {
@@ -126,9 +128,11 @@ const updateCardButton = (produto_id) => {
         addBtn.style.display = 'none';
         qtyBtn.style.display = 'flex';
         qtySpan.innerText = item.quantity;
+        card.classList.add('active');
     } else {
         addBtn.style.display = 'flex';
         qtyBtn.style.display = 'none';
+         card.classList.remove('active');
     }
 }
 
@@ -189,5 +193,59 @@ const initApp = () => {
         addDataToHTML();
     })
 }
+
+// confirm order
+const confirmOrderBtn = document.querySelector('#carbon-neutral button');
+const modalOverlay = document.getElementById('order-modal-overlay');
+const orderSummary = document.getElementById('order-summary');
+const modalFinalPrice = document.getElementById('modal-final-price');
+const closeModalBtn = document.getElementById('close-modal-btn');
+
+const renderOrderSummary = () => {
+    orderSummary.innerHTML = '';
+    let total = 0;
+
+    cart.forEach(item => {
+        const product = listaDeProdutos.find(p => p.id == item.produto_id);
+        const itemTotal = product.price * item.quantity;
+        total += itemTotal;
+
+        const div = document.createElement('div');
+        div.classList.add('order-summary-item');
+
+        div.innerHTML = `
+            <img src="${product.image.thumbnail}" alt="${product.name}">
+            
+            <div class="order-item-info">
+                <p class="order-item-name">${product.name}</p>
+                <p class="order-item-meta">${item.quantity}x @$${product.price.toFixed(2)}</p>
+            </div>
+
+            <strong class="order-item-total">$${itemTotal.toFixed(2)}</strong>
+        `;
+
+        orderSummary.appendChild(div);
+    });
+
+    modalFinalPrice.innerText = `$${total.toFixed(2)}`;
+};
+
+
+confirmOrderBtn.addEventListener('click', () => {
+    renderOrderSummary();
+    modalOverlay.style.display = 'flex';
+});
+
+closeModalBtn.addEventListener('click', () => {
+    modalOverlay.style.display = 'none';
+
+    cart = [];
+    addToCartHTML();
+
+    listaDeProdutos.forEach(produto => {
+        updateCardButton(produto.id);
+    });
+});
+
 
 initApp();
