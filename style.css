@@ -276,6 +276,22 @@ div#carbon-neutral button:hover {
     background-color: hsl(14, 86%, 35%);;
 }
 
+footer {
+    text-align: center;
+    margin-top: 60px;
+    padding: 20px;
+}
+
+footer p {
+    font-size: 400;
+    color: var(--Rose900);
+}
+
+footer a {
+    font-weight: 700;
+    color: var(--Red);
+}
+
 /* Confirm order */
 
 #order-modal-overlay {
@@ -384,5 +400,34 @@ div#carbon-neutral button:hover {
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+@media(max-width: 1175px) {
+    div#container-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+}
+
+@media(max-width: 960px) {
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media(max-width: 560px) {
+    div#container-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    }
+
+    div.card-dessert > img {
+        width: 400px;
     }
 }
