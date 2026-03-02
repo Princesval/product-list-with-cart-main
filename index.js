@@ -13,6 +13,7 @@ let confirmOrderDiv = document.getElementById('confirm-order');
 
 // Código principal
 
+// Pegar dados do json e gerar elementos html
 const addDataToHTML = () => {
     containerHTML.innerHTML= '';
     if(listaDeProdutos.length > 0) {
@@ -246,6 +247,5 @@ closeModalBtn.addEventListener('click', () => {
         updateCardButton(produto.id);
     });
 });
-
 
 initApp();
