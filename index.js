@@ -1,8 +1,8 @@
-let containerHTML = document.getElementById('container-grid');
+let containerHTML = document.getElementById('container-grid'); // Container onde os produtos serão renderizados
 let listaDeProdutos = [];
 
-let cartHTML = document.getElementById('cart-div');
-let cartCounter = document.getElementById('cart-counter');
+let cartHTML = document.getElementById('cart-div'); // Container lateral do carrinho
+let cartCounter = document.getElementById('cart-counter'); // Contador total de itens no carrinho
 let emptyCartImg = document.getElementById('empty-cart-img');
 let emptyCartP = document.getElementById('empty-cart-p');
 let cart = [];
@@ -53,6 +53,7 @@ containerHTML.addEventListener('click', (event) => {
     }
 })
 
+// Adiciona um produto ao carrinho ou incrementa a quantidade caso já exista
 const addToCart = (produto_id) => {
     let position = cart.findIndex((value) => value.produto_id == produto_id)
     if(cart.length <=0) {
