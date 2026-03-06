@@ -15,9 +15,9 @@ let confirmOrderDiv = document.getElementById('confirm-order');
 
 // Pegar dados do json e gerar elementos html
 const addDataToHTML = () => {
-    containerHTML.innerHTML= '';
-    if(listaDeProdutos.length > 0) {
-        listaDeProdutos.forEach(produto => {
+    containerHTML.innerHTML= ''; // Limpa o container
+    if(listaDeProdutos.length > 0) { // Verifica se a lista está vazia
+        listaDeProdutos.forEach(produto => { // Cria uma div para cada produto e depois gera os elementos dentro da div usando os dados da lista para preencher as informações 
             let newProduto = document.createElement('div');
             newProduto.classList.add('card-dessert');
             newProduto.dataset.id = produto.id;
@@ -44,8 +44,8 @@ const addDataToHTML = () => {
     }
 }
 
+// Verifica se o click foi no botão addToCart
 containerHTML.addEventListener('click', (event) => {
-    let click = event.target;
     const btn = event.target.closest('.addToCart');
     if (btn) {
         let produto_id = btn.parentElement.dataset.id;
@@ -72,20 +72,22 @@ const addToCart = (produto_id) => {
     addToCartHTML();
 }
 
+// Cria o html do carrinho
 const addToCartHTML = () => {
     cartHTML.innerHTML = ``;
-    let totalQuantity = 0;
-    finalPrice = 0;
+    let totalQuantity = 0; // Quantidade de itens no carrinho
+    finalPrice = 0; // Preço total
     if(cart.length > 0) {
+        // Esconder mensagem do carrinho vazio
         emptyCartImg.style.display = 'none';
         emptyCartP.style.display = 'none';
         confirmOrderDiv.style.display = 'block'
-
+        // Cria o container para cada produto no carrinho exibindo quantidade e preço total do produto
         cart.forEach(cart => {
             totalQuantity = totalQuantity + cart.quantity;
             let newCart = document.createElement('div');
             newCart.classList.add('cart-product-item');
-            let position = listaDeProdutos.findIndex((value) => value.id == cart.produto_id);
+            let position = listaDeProdutos.findIndex((value) => value.id == cart.produto_id); // Encontra o produto
             let info = listaDeProdutos[position];
             newCart.innerHTML += `
                 <div class="info-product">
@@ -116,6 +118,7 @@ const addToCartHTML = () => {
     updateCardButton(produto.id);})
 }
 
+// Atualiza o botão de adicionar ao carrinho
 const updateCardButton = (produto_id) => {
     const card = document.querySelector(`.card-dessert[data-id="${produto_id}"]`);
 
@@ -187,7 +190,7 @@ const removeFromCart = (produto_id) => {
 
 
 const initApp = () => {
-    // Pegar dados do json
+    // Pegar dados do json e salva em listaDeProdutos
     fetch('data.json')
     .then(response => response.json())
     .then(data => {
