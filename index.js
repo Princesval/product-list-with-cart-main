@@ -158,6 +158,7 @@ containerHTML.addEventListener('click', (event) => {
     }
 });
 
+// Reduzir número do produtos do carrinho
 const decrementItem = (produto_id) => {
     let position = cart.findIndex(item => item.produto_id == produto_id);
     if (position < 0) return;
