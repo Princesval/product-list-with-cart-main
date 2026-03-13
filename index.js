@@ -172,7 +172,7 @@ const decrementItem = (produto_id) => {
     addToCartHTML();
 };
 
-
+// Clique no botão de remover
 cartHTML.addEventListener('click', (event) => {
     const button = event.target.closest('.remove-item');
     if(!button) return;
@@ -181,6 +181,7 @@ cartHTML.addEventListener('click', (event) => {
     removeFromCart(produto_id);
 });
 
+// Remover itens do carrinho
 const removeFromCart = (produto_id) => {
     let position = cart.findIndex(item => item.produto_id == produto_id);
 
